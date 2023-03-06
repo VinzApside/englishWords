@@ -10,17 +10,22 @@ const routes: Routes = [
   {
     path: 'remove',
     loadChildren: () =>
-      import('./remove/remove.module').then((m) => m.RemovePageModule),
+      import('./components/remove/remove.module').then(
+        (m) => m.RemovePageModule
+      ),
   },
   {
     path: 'add',
-    loadChildren: () => import('./add/add.module').then((m) => m.AddPageModule),
+    loadChildren: () =>
+      import('./components/add/add.module').then((m) => m.AddPageModule),
   },
 
   {
     path: ':id',
     loadChildren: () =>
-      import('./guessWord/guessWord.module').then((m) => m.GuessWordPageModule),
+      import('./components/guessWord/guessWord.module').then(
+        (m) => m.GuessWordPageModule
+      ),
   },
 ];
 

@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./remove.page.scss'],
 })
 export class RemovePage implements OnInit {
-  public words: string[] = [];
+  public words: { eng: string; fr: string }[] = [];
   constructor() {}
 
   ngOnInit() {
-    this.words = ['aaa', 'bbbb', 'ccccc'];
+    this.words = [
+      { eng: 'aa', fr: 'aa' },
+      { eng: 'bbb', fr: 'bbb' },
+      { eng: 'cccccc', fr: 'cccccc' },
+    ];
   }
 }

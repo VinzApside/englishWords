@@ -1,0 +1,50 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Remove</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-item fill="outline">
+      <ion-label position="floating">Rechercher</ion-label>
+      <ion-input placeholder=""></ion-input>
+    </ion-item>
+  </ion-card>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4">
+        <p>Anglais</p>
+      </ion-col>
+      <ion-col size="4">
+        <p>Français</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-list *ngFor="let word  of words;">
+    <ion-card>
+      <ion-item>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="4">
+              <ion-text>{{word.eng}}</ion-text>
+            </ion-col>
+            <ion-col size="4">
+              <ion-text>{{word.fr}}</ion-text>
+            </ion-col>
+            <ion-col offset="2" size="2">
+              <ion-button>
+                <ion-icon slot="icon-only" name="trash"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-card>
+  </ion-list>
+</ion-content>
