@@ -1,0 +1,27 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Remove</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-item fill="outline">
+      <ion-label position="floating">Rechercher</ion-label>
+      <ion-input placeholder=""></ion-input>
+    </ion-item>
+  </ion-card>
+  <ion-card>
+    <ion-list *ngFor="let word  of words;">
+      <ion-item>
+        <ion-label>{{word}}</ion-label>
+        <ion-button slot="end">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+</ion-content>

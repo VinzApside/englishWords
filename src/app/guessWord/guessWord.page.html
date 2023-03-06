@@ -1,0 +1,41 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title> guessWord</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-row>
+    <ion-col size-md="6" size="12">
+      <ion-card>
+        <ion-item>
+          <ion-textarea [clearOnEdit]="true" placeholder="here"></ion-textarea>
+          <ion-label>Anglais</ion-label>
+        </ion-item>
+      </ion-card>
+    </ion-col>
+    <ion-col size-md="6" size="12">
+      <ion-card>
+        <ion-item>
+          <ion-textarea
+            [clearOnEdit]="true"
+            [readonly]="true"
+            placeholder="ici"
+          ></ion-textarea>
+          <ion-label>Français</ion-label>
+        </ion-item>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-card>
+    <ion-row class="ion-justify-content-center">
+      <ion-button fill="outline">
+        <ion-icon slot="icon-only" name="enter"></ion-icon>
+      </ion-button>
+    </ion-row>
+  </ion-card>
+</ion-content>
