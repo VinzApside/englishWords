@@ -1,11 +1,9 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { AddPageRoutingModule } from './add-routing.module';
-
 import { AddPage } from './add.page';
 
 @NgModule({
@@ -13,8 +11,10 @@ import { AddPage } from './add.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    AddPageRoutingModule
+    AddPageRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
-  declarations: [AddPage]
+  declarations: [AddPage],
 })
 export class AddPageModule {}

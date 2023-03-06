@@ -8,33 +8,46 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-row>
-    <ion-col size-md="6" size="12">
-      <ion-card>
-        <ion-item>
-          <ion-textarea [clearOnEdit]="true" placeholder="Add"></ion-textarea>
-          <ion-label>Anglais</ion-label>
-        </ion-item>
-      </ion-card>
-    </ion-col>
-    <ion-col size-md="6" size="12">
-      <ion-card>
-        <ion-item>
-          <ion-textarea
-            [clearOnEdit]="true"
-            placeholder="Ajouter"
-          ></ion-textarea>
-          <ion-label>Français</ion-label>
-        </ion-item>
-      </ion-card>
-    </ion-col>
-  </ion-row>
-
-  <ion-card>
-    <ion-row class="ion-justify-content-center">
-      <ion-button fill="outline">
-        <ion-icon slot="icon-only" name="enter"></ion-icon>
-      </ion-button>
+  <form [formGroup]="wordsForm" (ngSubmit)="onAddWords()">
+    <ion-row>
+      <ion-col size-md="6" size="12">
+        <ion-card>
+          <ion-item>
+            <ion-input
+              formControlName="englishWord"
+              type="text"
+              [clearOnEdit]="true"
+              placeholder="Add"
+            ></ion-input>
+            <ion-label>Anglais</ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+      <ion-col size-md="6" size="12">
+        <ion-card>
+          <ion-item>
+            <ion-input
+              formControlName="frenchWord"
+              type="text"
+              [clearOnEdit]="true"
+              placeholder="Ajouter"
+            ></ion-input>
+            <ion-label>Français</ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-col>
     </ion-row>
-  </ion-card>
+
+    <ion-card>
+      <ion-row class="ion-justify-content-center">
+        <ion-button
+          disabled="!englishWord && !frenchWord"
+          type="submit"
+          fill="outline"
+        >
+          <ion-icon slot="icon-only" name="enter"></ion-icon>
+        </ion-button>
+      </ion-row>
+    </ion-card>
+  </form>
 </ion-content>
