@@ -41,7 +41,10 @@
                 <ion-text>{{word.frenchWord}}</ion-text>
               </ion-col>
               <ion-col offset="2" size="2">
-                <ion-button (click)="onRemove(index)">
+                <ion-button
+                  [disabled]="disabledButton"
+                  (click)="onRemove(index)"
+                >
                   <ion-icon slot="icon-only" name="trash"></ion-icon>
                 </ion-button>
               </ion-col>
