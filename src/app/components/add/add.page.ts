@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
 import { Words } from 'src/app/models/data';
 
@@ -20,30 +20,38 @@ export class AddPage implements OnInit {
     private formBuilder: FormBuilder
   ) {
     this.words = [
-      { eng: 'aa', fr: 'aa' },
-      { eng: 'bbb', fr: 'bbb' },
-      { eng: 'cccccc', fr: 'cccccc' },
+      { englishWord: 'aa', frenchWord: 'aa' },
+      { englishWord: 'bbb', frenchWord: 'bbb' },
+      { englishWord: 'cccccc', frenchWord: 'cccccc' },
     ];
   }
 
   ngOnInit() {
+    const regexForWords = /^[a-zA-Z\s\-]*$/;
     this.wordsForm = this.formBuilder.group({
-      frenchWord: [null],
-      englishWord: [null],
+      frenchWord: [
+        null,
+        [Validators.required, Validators.pattern(regexForWords)],
+      ],
+      englishWord: [
+        null,
+        [Validators.required, Validators.pattern(regexForWords)],
+      ],
     });
   }
 
   onAddWords() {
-    console.log(this.englishWord, '+++', this.frenchWord);
-
-    const newWord = { eng: 'dddddddd', fr: 'dddddddddd' };
-    const engWord = newWord.eng
+    const newWord = this.wordsForm.value;
+    const engWord = newWord.englishWord
       .trim()
       .replace(/[&\/\#,+()$~%.'":*?<>{}]/g, '')
       .toLowerCase();
-    const existingWord = this.words.find((word) => word.eng === engWord);
+    const existingWord = this.words.find(
+      (word) => word.englishWord === engWord
+    );
     if (!existingWord) {
       this.words.push(newWord);
+      this.wordsForm.reset();
       this.presentToast('Ce mot a été ajouté');
     } else {
       this.presentToast('Ce mot existe déja', 'danger');

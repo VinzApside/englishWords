@@ -13,9 +13,9 @@ export class RemovePage implements OnInit {
 
   ngOnInit() {
     this.words = [
-      { eng: 'aa', fr: 'aa' },
-      { eng: 'bbb', fr: 'bbb' },
-      { eng: 'cccccc', fr: 'cccccc' },
+      { englishWord: 'aa', frenchWord: 'aa' },
+      { englishWord: 'bbb', frenchWord: 'bbb' },
+      { englishWord: 'cccccc', frenchWord: 'cccccc' },
     ];
   }
 

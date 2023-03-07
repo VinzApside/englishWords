@@ -41,9 +41,9 @@
     <ion-card>
       <ion-row class="ion-justify-content-center">
         <ion-button
-          disabled="!englishWord && !frenchWord"
           type="submit"
           fill="outline"
+          [disabled]="wordsForm.status==='INVALID'"
         >
           <ion-icon slot="icon-only" name="enter"></ion-icon>
         </ion-button>

@@ -1,6 +1,6 @@
 export class Words {
-  eng!: string;
-  fr!: string;
+  englishWord!: string;
+  frenchWord!: string;
 }
 
 export class Datas {
