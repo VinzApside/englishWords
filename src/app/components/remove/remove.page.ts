@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterContentChecked, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { Observable } from 'rxjs';
@@ -12,9 +12,10 @@ let number = 0;
   templateUrl: './remove.page.html',
   styleUrls: ['./remove.page.scss'],
 })
-export class RemovePage implements OnInit, OnDestroy {
+export class RemovePage implements OnInit, AfterContentChecked {
   public words: Words[] = [];
   public disabledButton = false;
+  public reloadWords = false;
   jsonData$!: Observable<unknown>;
 
   constructor(
@@ -27,11 +28,13 @@ export class RemovePage implements OnInit, OnDestroy {
 
   async ngOnInit() {
     this.words = await this.storageService.get();
-    console.log(this.words);
   }
 
-  ngOnDestroy() {
-    console.log('destroy');
+  async ngAfterContentChecked() {
+    if (this.reloadWords) {
+      this.reloadWords = false;
+      this.words = await this.storageService.get();
+    }
   }
 
   onRemove = async (index: number, word: Words) => {
@@ -43,6 +46,7 @@ export class RemovePage implements OnInit, OnDestroy {
   };
 
   onAddWord() {
+    this.reloadWords = true;
     this.route.navigateByUrl('/add');
   }
 
