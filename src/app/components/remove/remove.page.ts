@@ -1,6 +1,6 @@
-import { AfterContentChecked, Component, OnInit } from '@angular/core';
+import { AfterContentChecked, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { IonInput, ToastController } from '@ionic/angular';
 import { Words } from 'src/app/models/data';
 import { StorageService } from 'src/app/services/storageService';
 
@@ -15,6 +15,9 @@ export class RemovePage implements OnInit, AfterContentChecked {
   public words: Words[] = [];
   public disabledButton = false;
   public reloadWords = false;
+  public inputModel = '';
+
+  @ViewChild('ionInputEl', { static: true }) ionInputEl!: IonInput;
 
   constructor(
     private route: Router,
@@ -70,5 +73,31 @@ export class RemovePage implements OnInit, AfterContentChecked {
 
     const dismiss = await toast.onDidDismiss();
     this.disabledButton = this.disabledButton && dismiss.role !== 'timeout';
+  }
+
+  async onInput(ev: Event) {
+    const target = ev.target as HTMLInputElement;
+    const value = target?.value || null;
+    if (!value) {
+      this.words = await this.storageService.get();
+      return;
+    }
+    const filteredValue = value.replace(/[^a-zA-Z ]+/g, '');
+    /**
+     * Update both the state variable and
+     * the component to keep them in sync.
+     */
+    this.ionInputEl.value = this.inputModel = filteredValue;
+
+    const waitForIt = setTimeout(async () => {
+      const words = await this.storageService.get();
+
+      this.words = words.filter(
+        (word) =>
+          word.englishWord.includes(filteredValue) ||
+          word.frenchWord.includes(filteredValue)
+      );
+    }, 1000);
+    return () => clearTimeout(waitForIt);
   }
 }

@@ -11,11 +11,17 @@
   <ion-card>
     <ion-item fill="outline">
       <ion-label position="floating">Rechercher</ion-label>
-      <ion-input placeholder=""></ion-input>
+      <ion-input
+        [disabled]="!words.length && !inputModel.length"
+        #ionInputEl
+        [value]="inputModel"
+        (ionInput)="onInput($event)"
+        placeholder=""
+      ></ion-input>
     </ion-item>
   </ion-card>
 
-  <ion-grid>
+  <ion-grid *ngIf="words?.length">
     <ion-row>
       <ion-col size="4">
         <p>Anglais</p>
@@ -55,12 +61,15 @@
     </ion-list>
   </ng-template>
   <ng-template #noWord>
-    <ion-card>
-      <ion-row class="ion-justify-content-center">
-        <ion-button (click)="onAddWord()">
-          <ion-icon slot="icon-only" name="add"></ion-icon>
-        </ion-button>
-      </ion-row>
+    <ion-card *ngIf="ionInputEl?.value">
+      <p>No result</p>
     </ion-card>
   </ng-template>
+  <ion-card>
+    <ion-row class="ion-justify-content-center">
+      <ion-button (click)="onAddWord()">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-row>
+  </ion-card>
 </ion-content>
