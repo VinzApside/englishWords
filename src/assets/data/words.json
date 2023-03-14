@@ -1,7 +1,3 @@
 {
-  "words": [
-    { "englishWord": "aa", "frenchWord": "aa" },
-    { "englishWord": "bbb", "frenchWord": "bbb" },
-    { "englishWord": "cccccc", "frenchWord": "cccccc" }
-  ]
+  "words": [{ "englishWord": "test", "frenchWord": "test" }]
 }

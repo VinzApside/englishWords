@@ -27,33 +27,43 @@ export class StorageService {
     }
   }
 
-  public async get(key: string): Promise<Words[]> {
+  public async get(): Promise<Words[]> {
     return (await this._storage?.get(STORAGE_KEY)) || [];
   }
   public async add(item: Words): Promise<AddResponse> {
-    const storeData = (await this._storage?.get(STORAGE_KEY)) || [];
-    const isExist = this.isExistingWord(storeData, item);
+    const storedData = (await this._storage?.get(STORAGE_KEY)) || [];
+    const { englishWord } = item;
+    const isExist = this.isExistingWord(storedData, englishWord);
     if (!isExist) {
-      storeData.push(item);
-      await this._storage?.set(STORAGE_KEY, storeData);
+      storedData.push(item);
+      await this._storage?.set(STORAGE_KEY, storedData);
       return { message: 'Ce mot a été ajouté' };
     } else {
       return { message: 'Ce mot existe déja', type: 'danger' };
     }
   }
 
-  public async remove(key: string) {
+  public async remove(word: Words) {
+    const { englishWord } = word;
     let storedData = (await this._storage?.get(STORAGE_KEY)) || [];
-    storedData = storedData.filter((data: string) => data !== key);
-    return this._storage?.set(STORAGE_KEY, storedData);
+    const isExist = this.isExistingWord(storedData, englishWord);
+    if (isExist) {
+      storedData = storedData.filter(
+        (data: Words) => data.englishWord !== englishWord
+      );
+      await this._storage?.set(STORAGE_KEY, storedData);
+      return { message: 'Ce mot a été supprimé' };
+    } else {
+      return { message: "Ce mot n'existe pas", type: 'danger' };
+    }
   }
 
-  private isExistingWord(storeData: Words[], newItem: Words) {
-    const engWord = newItem.englishWord
+  private isExistingWord(storeData: Words[], englishWord: string) {
+    const engWord = englishWord
       .trim()
       .replace(/[&\/\#,+()$~%.'":*?<>{}]/g, '')
       .toLowerCase();
 
-    return storeData.find((word) => word.englishWord === engWord);
+    return storeData.find((word) => word?.englishWord === engWord);
   }
 }

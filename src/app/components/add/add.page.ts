@@ -21,7 +21,7 @@ export class AddPage implements OnInit {
   ) {}
 
   async loadData() {
-    const res = await this.useStorage.get('words');
+    const res = await this.useStorage.get();
     return res;
   }
 

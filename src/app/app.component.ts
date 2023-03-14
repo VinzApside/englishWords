@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 
 import { Words } from './models/data';
+import { StorageService } from './services/storageService';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,12 @@ export class AppComponent {
     { title: 'Remove', url: '/remove', icon: 'trash' },
   ];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  constructor(public http: HttpClient) {}
+  constructor(
+    public http: HttpClient,
+    private storageService: StorageService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.storageService.get();
+  }
 }
