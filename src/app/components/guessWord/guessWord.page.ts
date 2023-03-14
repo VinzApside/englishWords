@@ -27,13 +27,12 @@ export class GuessWordPage implements OnInit, AfterContentChecked {
 
   async ngOnInit() {
     await this.initWords();
-
-    this.getNewWordToGuess();
   }
 
-  private async initWords() {
+  public async initWords() {
     this.words = await this.storageService.get();
     this.zeroWord = this.wordsNumber = this.words.length;
+    this.getNewWordToGuess();
   }
 
   getNewWordToGuess() {
@@ -57,7 +56,6 @@ export class GuessWordPage implements OnInit, AfterContentChecked {
     if (this.reloadWords) {
       this.reloadWords = false;
       await this.initWords();
-      this.getNewWordToGuess();
     }
   }
 
