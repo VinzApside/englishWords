@@ -1,7 +1,6 @@
 import { AfterContentChecked, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-import { Observable } from 'rxjs';
 import { Words } from 'src/app/models/data';
 import { StorageService } from 'src/app/services/storageService';
 
@@ -16,7 +15,6 @@ export class RemovePage implements OnInit, AfterContentChecked {
   public words: Words[] = [];
   public disabledButton = false;
   public reloadWords = false;
-  jsonData$!: Observable<unknown>;
 
   constructor(
     private route: Router,
