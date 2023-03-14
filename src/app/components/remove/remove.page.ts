@@ -5,7 +5,7 @@ import { Words } from 'src/app/models/data';
 import { StorageService } from 'src/app/services/storageService';
 
 const duration = 1500;
-let number = 0;
+
 @Component({
   selector: 'app-remove',
   templateUrl: './remove.page.html',
