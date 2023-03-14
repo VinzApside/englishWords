@@ -8,34 +8,71 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-row>
-    <ion-col size-md="6" size="12">
-      <ion-card>
-        <ion-item>
-          <ion-textarea [clearOnEdit]="true" placeholder="here"></ion-textarea>
-          <ion-label>Anglais</ion-label>
-        </ion-item>
-      </ion-card>
-    </ion-col>
-    <ion-col size-md="6" size="12">
-      <ion-card>
-        <ion-item>
-          <ion-textarea
-            [clearOnEdit]="true"
-            [readonly]="true"
-            placeholder="ici"
-          ></ion-textarea>
-          <ion-label>Français</ion-label>
-        </ion-item>
-      </ion-card>
-    </ion-col>
-  </ion-row>
-
-  <ion-card>
-    <ion-row class="ion-justify-content-center">
-      <ion-button fill="outline">
-        <ion-icon slot="icon-only" name="enter"></ion-icon>
-      </ion-button>
+  <ng-container *ngIf="zeroWord; then wordsToGuess; else noWordToGuess">
+  </ng-container>
+  <ng-template #wordsToGuess>
+    <ion-row>
+      <ion-col size-md="6" size="12">
+        <ion-card>
+          <ion-item>
+            <ion-textarea
+              [clearOnEdit]="true"
+              [readonly]="guessFrench"
+              [placeholder]="guessWord.englishWord"
+            ></ion-textarea>
+            <ion-label>Anglais</ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+      <ion-col size-md="6" size="12">
+        <ion-card>
+          <ion-item>
+            <ion-textarea
+              [clearOnEdit]="true"
+              [readonly]="!guessFrench"
+              [placeholder]="guessWord.frenchWord"
+            ></ion-textarea>
+            <ion-label>Français</ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-col>
     </ion-row>
-  </ion-card>
+
+    <ion-card>
+      <ion-row class="ion-justify-content-center">
+        <ion-button fill="outline" (click)="checkAnswer()">
+          <ion-icon slot="icon-only" name="enter"></ion-icon>
+        </ion-button>
+      </ion-row>
+    </ion-card>
+  </ng-template>
+  <ng-template #noWordToGuess>
+    <ion-grid>
+      <ng-container *ngIf="!words.length; then addWord; else noMoreWord">
+      </ng-container>
+      <ng-template #addWord>
+        <ion-row class="ion-justify-content-center">
+          <h3>Add a word</h3>
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+          <ion-button (click)="onAddWord()">
+            <ion-icon slot="icon-only" name="add"></ion-icon>
+          </ion-button>
+        </ion-row>
+      </ng-template>
+      <ng-template #noMoreWord>
+        <ion-row class="ion-justify-content-center">
+          <iframe
+            title="clap"
+            src="https://giphy.com/embed/7rj2ZgttvgomY"
+            width="480"
+            height="275"
+            style="border: 0"
+            class="giphy-embed"
+            allowfullscreen
+          ></iframe>
+        </ion-row>
+      </ng-template>
+    </ion-grid>
+  </ng-template>
 </ion-content>
