@@ -4,7 +4,7 @@ import { IonInput, ToastController } from '@ionic/angular';
 import { Words } from 'src/app/models/data';
 import { StorageService } from 'src/app/services/storageService';
 
-const duration = 1500;
+const duration = 1000;
 
 @Component({
   selector: 'app-remove',
