@@ -18,7 +18,6 @@
             <ion-item>
               <ion-input
                 formControlName="eng"
-                [autofocus]="!guessFrench"
                 [clearOnEdit]="true"
                 (keypress)="onInput($event)"
                 [value]="inputModelEng"
@@ -35,7 +34,6 @@
               <ion-input
                 formControlName="fr"
                 [clearOnEdit]="true"
-                [autofocus]="guessFrench"
                 (keypress)="onInput($event)"
                 [value]="inputModelFr"
                 placeholder=""

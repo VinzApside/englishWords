@@ -79,6 +79,10 @@ export class GuessWordPage implements OnInit, AfterContentChecked {
       eng: this.inputModelEng,
       fr: this.inputModelFr,
     });
+
+    this.guessFrench ? this.engCtrl.disable() : this.frCtrl.disable();
+    this.guessFrench ? this.frCtrl.enable() : this.engCtrl.enable();
+
     this.engCtrl.addValidators([
       Validators.required,
       Validators.minLength(1),
