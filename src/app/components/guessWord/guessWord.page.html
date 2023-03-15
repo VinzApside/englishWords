@@ -8,47 +8,60 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ng-container *ngIf="zeroWord; then wordsToGuess; else noWordToGuess">
+  <ng-container *ngIf="remainingWords; then wordsToGuess; else noWordToGuess">
   </ng-container>
   <ng-template #wordsToGuess>
-    <ion-row>
-      <ion-col size-md="6" size="12">
-        <ion-card>
-          <ion-item>
-            <ion-textarea
-              [clearOnEdit]="true"
-              [readonly]="guessFrench"
-              [placeholder]="guessWord.englishWord"
-            ></ion-textarea>
-            <ion-label>Anglais</ion-label>
-          </ion-item>
-        </ion-card>
-      </ion-col>
-      <ion-col size-md="6" size="12">
-        <ion-card>
-          <ion-item>
-            <ion-textarea
-              [clearOnEdit]="true"
-              [readonly]="!guessFrench"
-              [placeholder]="guessWord.frenchWord"
-            ></ion-textarea>
-            <ion-label>Français</ion-label>
-          </ion-item>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-
-    <ion-card>
-      <ion-row class="ion-justify-content-center">
-        <ion-button fill="outline" (click)="checkAnswer()">
-          <ion-icon slot="icon-only" name="enter"></ion-icon>
-        </ion-button>
+    <form [formGroup]="GuessForm" (ngSubmit)="checkAnswer()" novalidate>
+      <ion-row>
+        <ion-col size-md="6" size="12">
+          <ion-card>
+            <ion-item>
+              <ion-input
+                formControlName="eng"
+                [autofocus]="!guessFrench"
+                [clearOnEdit]="true"
+                (keypress)="onInput($event)"
+                [value]="inputModelEng"
+                placeholder=""
+                #ionInputEng
+              ></ion-input>
+              <ion-label>Anglais</ion-label>
+            </ion-item>
+          </ion-card>
+        </ion-col>
+        <ion-col size-md="6" size="12">
+          <ion-card>
+            <ion-item>
+              <ion-input
+                formControlName="fr"
+                [clearOnEdit]="true"
+                [autofocus]="guessFrench"
+                (keypress)="onInput($event)"
+                [value]="inputModelFr"
+                placeholder=""
+                #ionInputFr
+              ></ion-input>
+              <ion-label>Français</ion-label>
+            </ion-item>
+          </ion-card>
+        </ion-col>
       </ion-row>
-    </ion-card>
+      <ion-card>
+        <ion-row class="ion-justify-content-center">
+          <ion-button
+            [disabled]="GuessForm.status==='INVALID'"
+            fill="outline"
+            type="submit"
+          >
+            <ion-icon slot="icon-only" name="enter"></ion-icon>
+          </ion-button>
+        </ion-row>
+      </ion-card>
+    </form>
   </ng-template>
   <ng-template #noWordToGuess>
     <ion-grid>
-      <ng-container *ngIf="!words.length; then addWord; else noMoreWord">
+      <ng-container *ngIf="isZeroWord; then addWord; else noMoreWord">
       </ng-container>
       <ng-template #addWord>
         <ion-row class="ion-justify-content-center">
