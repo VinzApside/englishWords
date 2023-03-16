@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
+import { CSVService } from 'src/app/services/csvService';
 import { StorageService } from 'src/app/services/storageService';
 
 @Component({
@@ -17,7 +18,8 @@ export class AddPage implements OnInit {
   constructor(
     private toastController: ToastController,
     private formBuilder: FormBuilder,
-    private useStorage: StorageService
+    private useStorage: StorageService,
+    private csvService: CSVService
   ) {}
 
   async loadData() {
@@ -63,5 +65,13 @@ export class AddPage implements OnInit {
     });
 
     await toast.present();
+  }
+
+  downloadCSV() {
+    this.csvService.downloadCSV();
+  }
+
+  uploadCSV(event: Event) {
+    this.csvService.uploadCSV(event);
   }
 }
