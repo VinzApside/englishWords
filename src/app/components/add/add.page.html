@@ -8,6 +8,24 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-row class="ion-justify-content-center">
+      <ion-button color="tertiary" type="button" (click)="downloadCSV()">
+        download CSV</ion-button
+      >
+      <ion-button color="secondary">
+        <input
+          type="file"
+          (change)="uploadCSV($event)"
+          id="file-input"
+          accept=".csv"
+          required
+          name="file-input"
+        />
+      </ion-button>
+      <!-- <input type="button" value="upload CSV" (click)="uploadCSV()" /> -->
+    </ion-row>
+  </ion-card>
   <form [formGroup]="wordsForm" (ngSubmit)="onAddWords()">
     <ion-row>
       <ion-col size-md="6" size="12">
@@ -50,22 +68,4 @@
       </ion-row>
     </ion-card>
   </form>
-  <ion-card>
-    <ion-row class="ion-justify-content-center">
-      <input type="button" value="download CSV" (click)="downloadCSV()" />
-      <ion-button expand="full">
-        <ion-icon lazy="true" slot="start" name="image"></ion-icon>
-        <ion-label slot="end">Upload CSV</ion-label>
-        <input
-          type="file"
-          (change)="uploadCSV($event)"
-          id="file-input"
-          accept=".csv"
-          required
-          name="file-input"
-        />
-      </ion-button>
-      <!-- <input type="button" value="upload CSV" (click)="uploadCSV()" /> -->
-    </ion-row>
-  </ion-card>
 </ion-content>

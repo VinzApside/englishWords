@@ -58,6 +58,10 @@ export class StorageService {
     }
   }
 
+  public async removeAll() {
+    await this._storage?.clear();
+  }
+
   private isExistingWord(storeData: Words[], englishWord: string) {
     const engWord = englishWord
       .trim()
